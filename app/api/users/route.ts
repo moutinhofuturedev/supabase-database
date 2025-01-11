@@ -1,6 +1,6 @@
 import type { UserDataResponse } from '@/types/users'
 import { supabase } from '@/utils/supabase/client'
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export const GET = async () => {
 	try {
@@ -28,4 +28,15 @@ export const GET = async () => {
 			{ status: 500 },
 		)
 	}
+}
+
+export const OPTIONS = (_request: NextRequest) => {
+	return new NextResponse(null, {
+		status: 204,
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+			'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+		},
+	})
 }
