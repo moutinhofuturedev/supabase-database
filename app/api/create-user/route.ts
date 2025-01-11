@@ -1,5 +1,5 @@
 import type { UserDataResponse } from '@/types/users'
-import { createClient } from '@/utils/supabase/client'
+import { supabase } from '@/utils/supabase/client'
 import { NextResponse } from 'next/server'
 
 export const POST = async (request: Request) => {
@@ -14,7 +14,7 @@ export const POST = async (request: Request) => {
 		}
 
 		// Inserir os dados no Supabase
-		const { data, error } = await createClient()
+		const { data, error } = await supabase
 			.from('users')
 			.insert([{ name, age, profession, imageSrc, alt }])
 			.select()

@@ -1,5 +1,5 @@
 import { schemaUser } from '@/types/schema-user'
-import { createClient } from '@/utils/supabase/client'
+import { supabase } from '@/utils/supabase/client'
 import { NextResponse } from 'next/server'
 import z from 'zod'
 
@@ -13,7 +13,7 @@ export async function DELETE(
 		const validatedId = z.string().parse(id)
 
 		// Remover o usuário do Supabase
-		const { error } = await createClient()
+		const { error } = await supabase
 			.from('users')
 			.delete()
 			.eq('id', validatedId)
@@ -54,7 +54,7 @@ export async function PATCH(
 		const validatedData = schemaUser.parse(body)
 
 		// Atualizar o usuário no Supabase
-		const { data, error } = await createClient()
+		const { data, error } = await supabase
 			.from('users')
 			.update(validatedData)
 			.eq('id', validatedId)

@@ -1,11 +1,11 @@
 import type { UserDataResponse } from '@/types/users'
-import { createClient } from '@/utils/supabase/client'
+import { supabase } from '@/utils/supabase/client'
 import { NextResponse } from 'next/server'
 
 export const GET = async () => {
 	try {
 		// Buscar os usuários do Supabase
-		const { data: users, error } = await createClient()
+		const { data: users, error } = await supabase
 			.from('users')
 			.select('*')
 			.order('createdAt', { ascending: false })
