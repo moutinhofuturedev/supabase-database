@@ -10,15 +10,12 @@ const allowedOrigins = [
 export function middleware(request: NextRequest) {
 	const origin = request.headers.get('origin')
 
-	console.log('Origem da requisição:', origin) // Log para debug
-
 	// Permite requisições sem origem (como de Postman ou curl)
 	if (!origin) {
 		return NextResponse.next()
 	}
 
 	if (!allowedOrigins.includes(origin)) {
-		console.log('Origem não permitida:', origin) // Log para debug
 		// Retorna 403 em vez de 400 para origens não permitidas
 		return new NextResponse(null, {
 			status: 403,
@@ -34,7 +31,7 @@ export function middleware(request: NextRequest) {
 	response.headers.set('Access-Control-Allow-Origin', origin)
 	response.headers.set(
 		'Access-Control-Allow-Methods',
-		'GET, POST, PUT, DELETE, OPTIONS',
+		'GET, POST, PUT, PATCH, DELETE, OPTIONS',
 	)
 	response.headers.set(
 		'Access-Control-Allow-Headers',
