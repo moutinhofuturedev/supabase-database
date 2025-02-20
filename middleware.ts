@@ -28,6 +28,7 @@ export function middleware(request: NextRequest) {
 
 	const response = NextResponse.next()
 
+	// Configurando cabecalhos CORS para a origem permitida
 	response.headers.set('Access-Control-Allow-Origin', origin)
 	response.headers.set(
 		'Access-Control-Allow-Methods',
